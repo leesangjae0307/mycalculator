@@ -63,6 +63,7 @@ void stack_overflow(void)
 void stack_underflow(void)
 {
 	printf("Not enough operands in expression\n");
+	printf("something");
 	exit(EXIT_FAILURE);
 }
 
@@ -74,3 +75,25 @@ static void reallocate(Stack * stack)
 	stack->contents = tmp;
 }
 
+int main() {
+    // 스택 생성
+    Stack *stack = create_stack(10);
+
+    // 값 푸쉬
+    push(stack, 1);
+    push(stack, 2);
+    push(stack, 3);
+
+    // 값 팝
+    pop(stack);
+    pop(stack);
+
+    // 현재 스택 최상단 값 확인
+    printf("Top of stack: %d\n", peek(stack));
+
+    // 스택 메모리 해제
+    free(stack->contents);
+    free(stack);
+
+    return 0;  // 프로그램 정상 종료
+}
